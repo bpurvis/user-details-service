@@ -7,7 +7,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.Optional;
@@ -45,7 +44,13 @@ public class SimpleUserDetailsService implements UserDetailsService {
             });
 
             return new UserDetailsImpl(
-                    user.get().getUsername(), user.get().getPassword(), true, true, true, true, authorities);
+                    user.get().getUsername(),
+                    user.get().getPassword(),
+                    user.get().getAccountNonExpired(),
+                    user.get().getAccountNonLocked(),
+                    user.get().getCredentialsNonExpired(),
+                    user.get().getAccountNonExpired(),
+                    authorities);
         }
 
         return null;
